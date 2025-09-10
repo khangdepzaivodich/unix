@@ -1,8 +1,11 @@
 # Setup project
 
 1.Setup Supabase project https://database.new
+
 2.Tạo Nextjs + Supabase App với lệnh npx create-next-app -e with-supabase
+
 3.Đổi tên .env.example thành .env.local sau đó copy-paste Project URL và Publishable key  
+
 4.Tạo file utils/supabase/server.ts để tạo một Supabase client lấy thông tin bảo mật từ file .env.local
 
 # JWT, Session, Cookie
