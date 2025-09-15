@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SignInWithGoogle from "./providers/SignInWithGoogle";
+import SignInWithFacebook from "./providers/SignInWithFacebook";
 
 export function LoginForm({
   className,
@@ -93,7 +94,10 @@ export function LoginForm({
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Logging in..." : "Login"}
               </Button>
-              <SignInWithGoogle />
+              <div className="flex flex-col gap-2">
+                <SignInWithGoogle />
+                <SignInWithFacebook />
+              </div>
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}

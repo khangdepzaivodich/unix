@@ -4,7 +4,7 @@
 
 2.Tạo Nextjs + Supabase App với lệnh npx create-next-app -e with-supabase
 
-3.Đổi tên .env.example thành .env.local sau đó copy-paste Project URL và Publishable key  
+3.Đổi tên .env.example thành .env.local sau đó copy-paste Project URL và Publishable key
 
 4.Tạo file utils/supabase/server.ts để tạo một Supabase client lấy thông tin bảo mật từ file .env.local
 
@@ -25,3 +25,5 @@
   - Lấy cookie của user -> xác minh JWT -> xác minh được user (Auth)
   - SSR data fetching (lấy dữ liệu trước khi render trang)
   - Các thao tác bảo mật cho admin
+
+# OAuth trong Supabase
