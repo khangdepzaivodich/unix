@@ -1,0 +1,336 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum KichCo {
+  S
+  M
+  L
+  XL
+  XXL
+}
+
+enum MauSac {
+  Red
+  Orange
+  Yellow
+  Green
+  Blue
+  Indigo
+  Violet
+  Black
+  White
+  Gray
+  Brown
+  Pink
+}
+
+enum TrangThai {
+  ACTIVE
+  INACTIVE
+}
+
+enum TrangThaiDonHang {
+  DANG_XU_LY
+  DANG_GIAO_HANG
+  HOAN_TAT
+}
+
+
+enum TrangThaiSP {
+  CON_HANG
+  HET_HANG
+  TAM_NGUNG
+}
+
+model CHITIETGIOHANG {
+  MaCTGH   String   @id @default(uuid())
+  created_at DateTime @default(now())
+  SoLuong  Int      @default(0)
+  MaGH     String
+  MaCTSP   String
+  GIOHANG  GIOHANG  @relation(fields: [MaGH], references: [MaGH])
+  CHITIETSANPHAM CHITIETSANPHAM @relation(fields: [MaCTSP], references: [MaCTSP])
+}
+
+model CHITIETSANPHAM {
+  MaCTSP    String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  KichCo    KichCo
+  MauSac    MauSac
+  HinhAnh   String?
+  MaSP      String
+  SoLuong   Int      @default(0)
+  TrangThai TrangThai @default(ACTIVE)
+  SANPHAM   SANPHAM  @relation(fields: [MaSP], references: [MaSP])
+  CHITIETGIOHANG CHITIETGIOHANG[]
+  DONHANG   DONHANG[]
+  NHAPHANG  NHAPHANG[]
+}
+
+model DANHMUC {
+  MaDM      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  TenDM     String
+  TrangThai TrangThai @default(ACTIVE)
+  MaLoai    String
+  LOAIDANHMUC LOAIDANHMUC @relation(fields: [MaLoai], references: [MaLoai])
+}
+
+model DONHANG {
+  MaDH      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  SoLuong   Int      @default(0)
+  TongTien  Int?
+  MaVoucher String?
+  MaCTSP    String
+  MaSK      String?
+  MaKH      String
+  VOUCHER   VOUCHER? @relation(fields: [MaVoucher], references: [MaVoucher])
+  CHITIETSANPHAM CHITIETSANPHAM @relation(fields: [MaCTSP], references: [MaCTSP])
+  SUKIENUUDAI SUKIENUUDAI? @relation(fields: [MaSK], references: [MaSK])
+  KHACHHANG KHACHHANG @relation(fields: [MaKH], references: [MaKH])
+  TINHTRANGDONHANG TINHTRANGDONHANG[]
+}
+
+model GIOHANG {
+  MaGH      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  MaKH      String
+  KHACHHANG KHACHHANG @relation(fields: [MaKH], references: [MaKH])
+  CHITIETGIOHANG CHITIETGIOHANG[]
+}
+
+model KHACHHANG {
+  MaKH      String   @id @default(uuid())
+  TenKH     String
+  SoDienThoai String
+  Email     String?
+  DiaChi    String?
+  MaTK      String?
+  TAIKHOAN  TAIKHOAN? @relation(fields: [MaTK], references: [MaTK])
+  GIOHANG   GIOHANG[]
+  DONHANG   DONHANG[]
+  PHANHOI   PHANHOI[]
+  VOUCHER_KHACHHANG VOUCHER_KHACHHANG[]
+}
+
+model LOAIDANHMUC {
+  MaLoai    String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  TenLoai   String
+  TrangThai TrangThai @default(ACTIVE)
+  DANHMUC   DANHMUC[]
+}
+
+model NHACUNGCAP {
+  MaNCC     String   @id @default(uuid())
+  created_at DateTime @default(now())
+  Email     String?
+  DienThoai String?
+  DiaChi    String?
+  TenNCC    String
+  NHAPHANG   NHAPHANG[]
+}
+
+model NHANVIEN {
+  MaNV      String   @id @default(uuid())
+  TenNV     String
+  SoDienThoai String?
+  Email     String?
+  CCCD      String?
+  MaTK      String?
+  TAIKHOAN  TAIKHOAN? @relation(fields: [MaTK], references: [MaTK])
+}
+
+model NHAPHANG {
+  MaNH        String   @id @default(uuid())
+  created_at  DateTime @default(now())
+  NgayNhap    DateTime @default(now())
+  SoLuong     Int
+  MaCTSP      String
+  MaNCC       String
+  CHITIETSANPHAM CHITIETSANPHAM @relation(fields: [MaCTSP], references: [MaCTSP])
+  NHACUNGCAP     NHACUNGCAP     @relation(fields: [MaNCC], references: [MaNCC])
+}
+
+
+model PHANHOI {
+  MaPH      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  MaKH      String
+  MaSP      String
+  DanhGia   String
+  ChiTietDanhGia String?
+  SANPHAM   SANPHAM  @relation(fields: [MaSP], references: [MaSP])
+  KHACHHANG KHACHHANG @relation(fields: [MaKH], references: [MaKH])
+}
+
+model QUYENHAN {
+  MaQH      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  TenQH     String?
+  VAITRO_QUYENHAN VAITRO_QUYENHAN[]
+}
+
+model SANPHAM {
+  MaSP      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  MoTa      String?
+  TenSP     String
+  GiaBan    Int
+  GiaMua    Int
+  TrangThai TrangThai @default(ACTIVE)
+  CHITIETSANPHAM CHITIETSANPHAM[]
+  PHANHOI   PHANHOI[]
+}
+
+model SUKIENUUDAI {
+  MaSK      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  NgayKT    DateTime
+  TenSK     String
+  NgayPH    DateTime
+  PhanTramGiam Int
+  DONHANG   DONHANG[]
+}   
+
+model TAIKHOAN {
+  MaTK      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  Username  String?
+  MatKhau   String?
+  Status    Boolean @default(true)
+  Avatar    String?
+  KHACHHANG KHACHHANG[]
+  NHANVIEN  NHANVIEN[]
+}
+
+model TINHTRANGDONHANG {
+  MaTTDH    String   @id @default(uuid())
+  created_at DateTime @default(now())
+  TrangThai  TrangThaiDonHang @default(DANG_XU_LY)
+  MaDH      String?
+  DONHANG   DONHANG? @relation(fields: [MaDH], references: [MaDH])
+}
+
+model VAITRO {
+  MaVT      String   @id @default(uuid())
+  created_at DateTime @default(now())
+  TenVT     String?
+  VAITRO_QUYENHAN VAITRO_QUYENHAN[]
+}
+
+model VAITRO_QUYENHAN {
+  MaVTQH    String   @id @default(uuid())
+  created_at DateTime @default(now())
+  MaVT      String
+  MaQH      String
+  VAITRO    VAITRO   @relation(fields: [MaVT], references: [MaVT])
+  QUYENHAN  QUYENHAN @relation(fields: [MaQH], references: [MaQH])
+}
+
+model VOUCHER {
+  MaVoucher String   @id @default(uuid())
+  created_at DateTime @default(now())
+  TenVoucher String
+  SoTien    Int      @default(0)
+  FreeShip  Boolean  @default(false)
+  NgayBatDau String
+  NgayKetThuc String
+  DIeuKien  Int      @default(0)
+  DONHANG   DONHANG[]
+  VOUCHER_KHACHHANG VOUCHER_KHACHHANG[]
+}
+
+model VOUCHER_KHACHHANG {
+  MaVCKH    String   @id @default(uuid())
+  created_at DateTime @default(now())
+  MaKH      String
+  MaVoucher String
+  KHACHHANG KHACHHANG @relation(fields: [MaKH], references: [MaKH])
+  VOUCHER   VOUCHER   @relation(fields: [MaVoucher], references: [MaVoucher])
+}
+
+//
+// VIEWS (read-only)
+//
+
+model v_chitietsanpham {
+  MaSP             String
+  TenSP            String
+  MoTa             String?
+  MaCTSP           String
+  KichCo           KichCo
+  MauSac           MauSac
+  SoLuong          Int
+  TrangThai        TrangThai
+  ngay_tao_sanpham DateTime
+  ngay_capnhat     DateTime
+
+  @@map("v_chitietsanpham")
+  @@ignore
+}
+
+model v_nhaphang {
+  MaNH       String
+  NgayNhap   DateTime
+  MaNCC      String
+  TenNCC     String
+  MaCTSP     String
+  TenSP      String
+  SoLuong    Int
+  created_at DateTime
+
+  @@map("v_nhaphang")
+  @@ignore
+}
+
+model v_donhang_tinhtrang {
+  MaDH         String
+  MaKH         String
+  TenKH        String
+  ngay_dat     DateTime
+  TrangThai    TrangThaiDonHang
+  ngay_capnhat DateTime
+
+  @@map("v_donhang_tinhtrang")
+  @@ignore
+}
+
+model v_chitietdonhang {
+  MaDH     String
+  TenKH    String
+  TenSP    String
+  KichCo   KichCo
+  MauSac   MauSac
+  SoLuong  Int
+  ngay_dat DateTime
+
+  @@map("v_chitietdonhang")
+  @@ignore
+}
+
+model v_voucher_donhang {
+  MaDH       String
+  TenKH      String
+  MaVoucher  String?
+  TenVoucher String?
+  SoTien     Int?
+  FreeShip   Boolean?
+  ngay_dat   DateTime
+
+  @@map("v_voucher_donhang")
+  @@ignore
+}
