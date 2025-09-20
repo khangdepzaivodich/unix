@@ -82,6 +82,7 @@ model DANHMUC {
   TrangThai TrangThai @default(ACTIVE)
   MaLoai    String
   LOAIDANHMUC LOAIDANHMUC @relation(fields: [MaLoai], references: [MaLoai])
+  SANPHAM   SANPHAM[]
 }
 
 model DONHANG {
@@ -183,6 +184,7 @@ model QUYENHAN {
 
 model SANPHAM {
   MaSP      String   @id @default(uuid())
+  MaDM      String 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
   MoTa      String?
@@ -192,6 +194,7 @@ model SANPHAM {
   TrangThai TrangThai @default(ACTIVE)
   CHITIETSANPHAM CHITIETSANPHAM[]
   PHANHOI   PHANHOI[]
+  DANHMUC   DANHMUC @relation(fields: [MaDM], references: [MaDM])
 }
 
 model SUKIENUUDAI {
@@ -267,70 +270,149 @@ model VOUCHER_KHACHHANG {
 // VIEWS (read-only)
 //
 
-model v_chitietsanpham {
-  MaSP             String
-  TenSP            String
-  MoTa             String?
-  MaCTSP           String
-  KichCo           KichCo
-  MauSac           MauSac
-  SoLuong          Int
-  TrangThai        TrangThai
-  ngay_tao_sanpham DateTime
-  ngay_capnhat     DateTime
+model view_khachhang_giohang_chitietgiohang_sanpham_danhmuc {
+  MaKH        String
+  TenKH       String
+  SDTKH       String?
+  EmailKH     String?
+  DiaChiKH    String?
+  MaTK_KH     String?
 
-  @@map("v_chitietsanpham")
+  MaTK        String?
+  Username    String?
+  TK_Status   Boolean?
+  Avatar      String?
+
+  MaGH        String?
+  GH_NgayTao  DateTime?
+  GH_MaKH     String?
+
+  MaCTGH      String?
+  SoLuongGH   Int?
+  CTGH_MaGH   String?
+  CTGH_MaCTSP String?
+
+  MaCTSP      String?
+  KichCo      String?
+  MauSac      String?
+  HinhAnh     String?
+  CTSP_MaSP   String?
+  SoLuongCTSP Int?
+  TrangThaiCTSP String?
+
+  MaSP        String?
+  TenSP       String?
+  MoTa        String?
+  GiaBan      Int?
+  GiaMua      Int?
+  TrangThaiSP String?
+  SP_MaDM     String?
+  SP_NgayTao  DateTime?
+  SP_NgayCapNhat DateTime?
+
+  MaDM        String?
+  TenDM       String?
+  TrangThaiDM String?
+  DM_MaLoai   String?
+  DM_NgayTao  DateTime?
+  DM_NgayCapNhat DateTime?
+
+  MaLoai      String?
+  TenLoai     String?
+  TrangThaiLoaiDM String?
+  LoaiDM_NgayTao DateTime?
+  LoaiDM_NgayCapNhat DateTime?
+
+  @@map("view_khachhang_giohang_chitietgiohang_sanpham_danhmuc")
+  @@ignore 
+}
+
+model view_donhang_voucher_sukien_tinhtrang_phanhoi {
+  MaDH        String
+  SoLuongDH   Int?
+  TongTien    Int?
+  DH_MaVoucher String?
+  DH_MaCTSP   String?
+  DH_MaSK     String?
+  DH_MaKH     String?
+  DH_NgayTao  DateTime?
+
+  MaVoucher   String?
+  TenVoucher  String?
+  TienGiam    Int?
+  FreeShip    Boolean?
+  NgayBatDau  String?
+  NgayKetThuc String?
+  DIeuKien    Int?
+  Voucher_NgayTao DateTime?
+
+  MaSK        String?
+  TenSK       String?
+  NgayPH      DateTime?
+  NgayKT      DateTime?
+  PhanTramGiam Int?
+  SK_NgayTao  DateTime?
+  SK_NgayCapNhat DateTime?
+
+  MaTTDH      String?
+  TrangThaiDonHang String?
+  TTDH_MaDH  String?
+  TTDH_NgayTao DateTime?
+
+  MaPH        String?
+  DanhGia     String?
+  ChiTietDanhGia String?
+  PH_MaKH     String?
+  PH_MaSP     String?
+  PH_NgayTao  DateTime?
+
+  @@map("view_donhang_voucher_sukien_tinhtrang_phanhoi")
   @@ignore
 }
 
-model v_nhaphang {
-  MaNH       String
-  NgayNhap   DateTime
-  MaNCC      String
-  TenNCC     String
-  MaCTSP     String
-  TenSP      String
-  SoLuong    Int
-  created_at DateTime
+model view_nhaphang_nhacungcap_nhanvien_vaitro_quyenhan {
+  MaNH        String
+  NgayNhap    DateTime?
+  SoLuongNhap Int?
+  NH_MaCTSP   String?
+  NH_MaNCC    String?
+  NH_NgayTao  DateTime?
 
-  @@map("v_nhaphang")
+  NCC_MaNCC   String?
+  NCC_TenNCC  String?
+  NCC_Email   String?
+  NCC_SDT     String?
+  NCC_DiaChi  String?
+  NCC_NgayTao DateTime?
+
+  NV_MaNV     String?
+  NV_TenNV    String?
+  NV_SDT      String?
+  NV_Email    String?
+  NV_CCCD     String?
+  NV_MaTK     String?
+
+  TK_Username String?
+  TK_Status   Boolean?
+  TK_Avatar   String?
+  TK_NgayTao  DateTime?
+  TK_NgayCapNhat DateTime?
+
+  VT_MaVT     String?
+  VT_TenVT    String?
+  VT_NgayTao  DateTime?
+
+  QH_MaQH     String?
+  QH_TenQH    String?
+  QH_NgayTao  DateTime?
+
+  VRQ_MaVTQH  String?
+  VRQ_MaVT    String?
+  VRQ_MaQH    String?
+  VRQ_NgayTao DateTime?
+
+  @@map("view_nhaphang_nhacungcap_nhanvien_vaitro_quyenhan")
   @@ignore
 }
 
-model v_donhang_tinhtrang {
-  MaDH         String
-  MaKH         String
-  TenKH        String
-  ngay_dat     DateTime
-  TrangThai    TrangThaiDonHang
-  ngay_capnhat DateTime
 
-  @@map("v_donhang_tinhtrang")
-  @@ignore
-}
-
-model v_chitietdonhang {
-  MaDH     String
-  TenKH    String
-  TenSP    String
-  KichCo   KichCo
-  MauSac   MauSac
-  SoLuong  Int
-  ngay_dat DateTime
-
-  @@map("v_chitietdonhang")
-  @@ignore
-}
-
-model v_voucher_donhang {
-  MaDH       String
-  TenKH      String
-  MaVoucher  String?
-  TenVoucher String?
-  SoTien     Int?
-  FreeShip   Boolean?
-  ngay_dat   DateTime
-
-  @@map("v_voucher_donhang")
-  @@ignore
-}
