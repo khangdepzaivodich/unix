@@ -1,23 +1,23 @@
+import type React from "react";
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { CartProvider } from "@/contexts/cart-context";
+import { AuthProvider } from "@/contexts/auth-context";
+import { LanguageProvider } from "@/contexts/language-context";
+import { LiveChat } from "@/components/customer-support/live-chat";
+import { Suspense } from "react";
 import "./globals.css";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "FashionStore - Thời trang hiện đại",
+  description:
+    "Cửa hàng thời trang trực tuyến hàng đầu Việt Nam với những sản phẩm chất lượng cao",
+  generator: "v0.app",
 };
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  display: "swap",
-  subsets: ["latin"],
-});
 
 export default function RootLayout({
   children,
@@ -25,16 +25,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="vi">
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <LanguageProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <main className="min-h-screen">{children}</main>
+                <Footer />
+              </Suspense>
+            </CartProvider>
+          </AuthProvider>
+        </LanguageProvider>
+        <Analytics />
+        <LiveChat />
       </body>
     </html>
   );
