@@ -12,7 +12,7 @@
   --card-foreground: #1f2937;
   --popover: #ffffff;
   --popover-foreground: #1f2937;
-  --primary: #8b5cf6;
+  --primary: 139 92 246;
   --primary-foreground: #ffffff;
   --secondary: #6b7280;
   --secondary-foreground: #ffffff;
@@ -61,7 +61,7 @@
   --destructive-foreground: #0f172a;
   --border: #334155;
   --input: #1e293b;
-  --ring: #a855f7;
+  --ring: 168 85 247;
   --chart-1: #60a5fa;
   --chart-2: #fcd34d;
   --chart-3: #4ade80;
@@ -120,14 +120,20 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+  input,
+  textarea,
+  select {
+    @apply outline-1;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
-@layer utilities {
+/* @layer utilities {
   .outline-ring\/50 {
     outline: 2px solid hsl(var(--ring) / 0.5);
+    outline-offset: 2px;
   }
-}
+} */
