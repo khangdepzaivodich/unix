@@ -111,7 +111,10 @@ export default function AboutPage() {
 
       <div className="grid md:grid-cols-3 gap-8 mb-16">
         {values.map((value, index) => (
-          <Card key={index} className="text-center">
+          <Card
+            key={index}
+            className="text-center hover:-translate-y-5 hover:scale-95 transition"
+          >
             <CardContent className="pt-8">
               <div className="flex items-center justify-center mb-4">
                 <value.icon className="h-12 w-12 text-primary" />
