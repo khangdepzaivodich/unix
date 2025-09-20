@@ -27,3 +27,8 @@
   - Các thao tác bảo mật cho admin
 
 # OAuth trong Supabase
+
+////////////////
+
+npm i geist
+npm i @vercel/analytics

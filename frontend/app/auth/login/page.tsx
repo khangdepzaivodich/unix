@@ -7,4 +7,3 @@ export default function Page() {
     </div>
   );
 }
-1;
