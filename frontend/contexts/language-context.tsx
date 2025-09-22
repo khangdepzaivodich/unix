@@ -102,19 +102,29 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("vi");
+export function LanguageProvider({
+  children,
+  initialLanguage = "vi",
+}: {
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguage] = useState<Language>(initialLanguage);
 
   useEffect(() => {
-    const saved = localStorage.getItem("language") as Language;
-    if (saved && (saved === "vi" || saved === "en")) {
+    const saved = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("language="))
+      ?.split("=")[1] as Language;
+
+    if (saved === "vi" || saved === "en") {
       setLanguage(saved);
     }
   }, []);
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem("language", lang);
+    document.cookie = `language=${lang}; path=/; max-age=31536000`;
   };
 
   const t = (key: string): string => {

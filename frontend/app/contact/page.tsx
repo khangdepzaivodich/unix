@@ -53,7 +53,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      details: ["info@fashionstore.vn", "support@fashionstore.vn"],
+      details: ["info@FashionStore.vn", "support@FashionStore.vn"],
     },
     {
       icon: Clock,
