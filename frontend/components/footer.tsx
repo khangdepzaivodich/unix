@@ -7,6 +7,7 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -16,8 +17,8 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-primary"></div>
-              <span className="text-xl font-bold">FashionStore</span>
+              <Image src={"/logo.png"} alt="Logo" width={80} height={100} />
+              <span className="text-xl font-bold">FlexStyle</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Cửa hàng thời trang hàng đầu Việt Nam, mang đến những sản phẩm
