@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Card,
   CardContent,
@@ -124,6 +125,37 @@ export function SignUpForm({
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="terms"
+                  checked={acceptTerms}
+                  onCheckedChange={(checked) => setAcceptTerms(!!checked)}
+                />
+                <Label htmlFor="terms" className="text-sm">
+                  Tôi đồng ý với{" "}
+                  <Link
+                    href="/shipping"
+                    className="text-primary hover:underline"
+                  >
+                    chính sách giao hàng
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="/returns"
+                    className="text-primary hover:underline"
+                  >
+                    đổi trả hàng
+                  </Link>{" "}
+                  và{" "}
+                  <Link
+                    href="/privacy"
+                    className="text-primary hover:underline"
+                  >
+                    chính sách bảo mật
+                  </Link>{" "}
+                  của FlexStyle
+                </Label>
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
