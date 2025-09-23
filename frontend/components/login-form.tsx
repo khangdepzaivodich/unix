@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SignInWithGoogle from "./providers/SignInWithGoogle";
 import SignInWithFacebook from "./providers/SignInWithFacebook";
-
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 export function LoginForm({
   className,
   ...props
@@ -50,66 +50,73 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn("z-10 bg-ư flex flex-col gap-6", className)} {...props}>
       <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Đăng nhập</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Đăng nhập vào tài khoản của bạn để tiếp tục mua sắm
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+        <form onSubmit={handleLogin}>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Mật khẩu</Label>
               </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="/auth/forgot-password"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </Link>
-                </div>
+              <div className="relative">
                 <Input
                   id="password"
-                  type="password"
-                  required
+                  type={"password"}
+                  placeholder="Nhập mật khẩu"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Logging in..." : "Login"}
-              </Button>
-              <div className="flex flex-col gap-2">
-                <SignInWithGoogle />
-                <SignInWithFacebook />
-              </div>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+            <div className="flex items-center justify-between">
               <Link
-                href="/auth/sign-up"
-                className="underline underline-offset-4"
+                href="/auth/forgot-password"
+                className="text-sm text-primary hover:underline"
               >
-                Sign up
+                Quên mật khẩu?
               </Link>
             </div>
-          </form>
-        </CardContent>
+            {error && <p className="text-sm text-red-500">{error}</p>}
+            <Button
+              type="submit"
+              className="w-full bg-black text-white"
+              disabled={isLoading}
+            >
+              {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
+            </Button>
+            <div className="flex flex-col gap-2">
+              <SignInWithGoogle />
+              <SignInWithFacebook />
+            </div>
+            <div className="mt-4 text-center text-sm">
+              Chưa có tài khoản?{" "}
+              <Link
+                href="/auth/sign-up"
+                className="text-primary hover:underline"
+              >
+                Đăng ký ngay
+              </Link>
+            </div>
+          </CardContent>
+        </form>
       </Card>
     </div>
   );
