@@ -47,19 +47,28 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
 
-  if (
-    request.nextUrl.pathname !== "/" &&
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth") &&
-    !request.nextUrl.pathname.startsWith("/about") &&
-    !request.nextUrl.pathname.startsWith("/contact") &&
-    !request.nextUrl.pathname.startsWith("/shipping") &&
-    !request.nextUrl.pathname.startsWith("/returns") &&
-    !request.nextUrl.pathname.startsWith("/privacy") &&
-    !request.nextUrl.pathname.startsWith("/login")
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  // Define public routes
+  const publicRoutes = [
+    "/",
+    "/login",
+    "/auth",
+    "/about",
+    "/contact",
+    "/shipping",
+    "/returns",
+    "/privacy",
+    "/products",
+  ];
+
+  // Check if current path is public
+  const isPublic = publicRoutes.some(
+    (route) =>
+      request.nextUrl.pathname === route ||
+      request.nextUrl.pathname.startsWith(route + "/")
+  );
+
+  // Redirect to login if not authenticated and not on public route
+  if (!user && !isPublic) {
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
     return NextResponse.redirect(url);
