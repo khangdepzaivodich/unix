@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/language-context";
 
 export function ForgotPasswordForm({
   className,
@@ -23,6 +25,7 @@ export function ForgotPasswordForm({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,10 +65,14 @@ export function ForgotPasswordForm({
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
+            <CardTitle className="text-2xl text-center">
+              {t("auth.resetPassword")}
+            </CardTitle>
             <CardDescription>
-              Type in your email and we&apos;ll send you a link to reset your
-              password
+              Nhập email của bạn để xác minh. Chúng tôi sẽ gửi bạn link thay đổi
+              mật khẩu
+              {/* Type in your email and we&apos;ll send you a link to reset your
+              password */}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -76,7 +83,7 @@ export function ForgotPasswordForm({
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="your@example.com"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -84,16 +91,16 @@ export function ForgotPasswordForm({
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Sending..." : "Send reset email"}
+                  {isLoading ? "Sending..." : "Gửi email xác nhận"}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
+                {t("auth.subResetPassword")}{" "}
                 <Link
                   href="/auth/login"
-                  className="underline underline-offset-4"
+                  className="text-sm text-primary hover:underline"
                 >
-                  Login
+                  {t("auth.login")}
                 </Link>
               </div>
             </form>

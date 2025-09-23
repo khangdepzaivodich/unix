@@ -26,8 +26,12 @@ const translations = {
     "nav.account": "Tài khoản",
     "nav.login": "Đăng nhập",
     "nav.register": "Đăng ký",
-
+    //Auth
+    "auth.subResetPassword": "Đã có tài khoản",
+    "auth.login": "Đăng nhập",
+    "auth.resetPassword": "Quên mật khẩu",
     // Common
+
     "common.search": "Tìm kiếm",
     "common.filter": "Lọc",
     "common.sort": "Sắp xếp",
@@ -68,7 +72,10 @@ const translations = {
     "nav.account": "Account",
     "nav.login": "Login",
     "nav.register": "Register",
-
+    //Auth
+    "auth.subResetPassword": "Already have an account?",
+    "auth.login": "Login",
+    "auth.resetPassword": "Reset Password",
     // Common
     "common.search": "Search",
     "common.filter": "Filter",

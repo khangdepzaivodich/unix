@@ -46,16 +46,23 @@ export function UpdatePasswordForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Reset Your Password</CardTitle>
+          <CardTitle className="text-2xl">
+            Thay đổi mật khẩu
+            {/* Reset Your Password */}
+          </CardTitle>
           <CardDescription>
-            Please enter your new password below.
+            Vui lòng nhập khẩu mới
+            {/* Please enter your new password below. */}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleForgotPassword}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="password">New password</Label>
+                <Label htmlFor="password">
+                  Mật khẩu mới
+                  {/* New password */}
+                </Label>
                 <Input
                   id="password"
                   type="password"
