@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        background: "rgb(var(--background) / <alpha-value>)",
         foreground: "var(--foreground)",
         card: {
           DEFAULT: "var(--card)",

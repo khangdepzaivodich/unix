@@ -11,6 +11,7 @@ import { LanguageProvider } from "@/contexts/language-context";
 import { LiveChat } from "@/components/customer-support/live-chat";
 import { Suspense } from "react";
 import "./globals.css";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "FashionStore - Thời trang hiện đại",
@@ -19,15 +20,18 @@ export const metadata: Metadata = {
   generator: "v0.app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const language = cookieStore.get("language")?.value || "vi";
+
   return (
     <html lang="vi">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <LanguageProvider>
+        <LanguageProvider initialLanguage={language as "vi" | "en"}>
           <AuthProvider>
             <CartProvider>
               <Suspense fallback={<div>Loading...</div>}>

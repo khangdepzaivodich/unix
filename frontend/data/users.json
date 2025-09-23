@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "email": "admin@fashionstore.vn",
+      "email": "admin@FashionStore.vn",
       "name": "Nguyễn Minh Anh",
       "avatar": "/placeholder.svg?height=100&width=100",
       "role": "admin",
@@ -39,7 +39,7 @@
     },
     {
       "id": "2",
-      "email": "operations@fashionstore.vn",
+      "email": "operations@FashionStore.vn",
       "name": "Trần Văn Hùng",
       "avatar": "/placeholder.svg?height=100&width=100",
       "role": "staff_operations",
@@ -59,7 +59,7 @@
     },
     {
       "id": "3",
-      "email": "support@fashionstore.vn",
+      "email": "support@FashionStore.vn",
       "name": "Lê Thị Mai",
       "avatar": "/placeholder.svg?height=100&width=100",
       "role": "staff_customer_service",
@@ -76,7 +76,7 @@
     },
     {
       "id": "4",
-      "email": "inventory@fashionstore.vn",
+      "email": "inventory@FashionStore.vn",
       "name": "Phạm Đức Nam",
       "avatar": "/placeholder.svg?height=100&width=100",
       "role": "staff_inventory",
@@ -95,7 +95,7 @@
     },
     {
       "id": "5",
-      "email": "manager@fashionstore.vn",
+      "email": "manager@FashionStore.vn",
       "name": "Hoàng Thị Lan",
       "avatar": "/placeholder.svg?height=100&width=100",
       "role": "staff_manager",
