@@ -156,7 +156,7 @@ export function Header() {
                 className="hidden md:flex"
                 asChild
               >
-                <Link href="/login">
+                <Link href="/auth/login">
                   <User className="h-5 w-5" />
                 </Link>
               </Button>
