@@ -78,14 +78,16 @@ export type Permission =
 export interface User {
   id: string;
   email: string;
-  name: string;
-  avatar?: string;
-  role: UserRole;
-  permissions: Permission[];
-  department?: string;
-  isActive: boolean;
-  createdAt: string;
-  lastLogin?: string;
+  user_metadata?: {
+    name?: string;
+    avatar?: string;
+    role?: UserRole;
+    permissions?: Permission[];
+    department?: string;
+  };
+  created_at?: string;
+  last_sign_in_at?: string;
+  is_active?: boolean;
 }
 
 export interface Order {

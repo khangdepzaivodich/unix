@@ -250,7 +250,7 @@ export function Header() {
                   </>
                 ) : (
                   <Link
-                    href="/login"
+                    href="/auth/login"
                     className="text-sm font-medium hover:text-primary transition-colors py-2"
                   >
                     {t("nav.login")}
