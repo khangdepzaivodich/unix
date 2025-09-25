@@ -29,15 +29,13 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const language = cookieStore.get("language")?.value || "vi";
   const supabase = createClient();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const currentSession = (await supabase).auth.getSession();
 
   return (
     <html lang="vi" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <LanguageProvider initialLanguage={language as "vi" | "en"}>
-          <AuthProvider initialSession={session}>
+          <AuthProvider initialSession={(await currentSession).data.session}>
             <CartProvider>
               <Suspense fallback={<div>Loading...</div>}>
                 <Header />

@@ -42,32 +42,37 @@ export function AuthProvider({
 
   // Load user from Supabase on mount and listen for auth changes
   useEffect(() => {
-    const getUser = async () => {
-      setState((prev) => ({ ...prev, isLoading: true }));
-      const { data, error } = await supabase.auth.getUser();
-      if (data?.user) {
-        setState({
-          user: data.user,
-          isLoading: false,
-          isAuthenticated: true,
-        });
-      } else {
-        setState({
-          user: null,
-          isLoading: false,
-          isAuthenticated: false,
-        });
-      }
-    };
-    getUser();
+    // const getUser = async () => {
+    //   setState((prev) => ({ ...prev, isLoading: true }));
+    //   const { data, error } = await supabase.auth.getUser();
+    //   if (data?.user) {
+    //     setState({
+    //       user: data.user,
+    //       isLoading: false,
+    //       isAuthenticated: true,
+    //     });
+    //   } else {
+    //     setState({
+    //       user: null,
+    //       isLoading: false,
+    //       isAuthenticated: false,
+    //     });
+    //   }
+    // };
+    // getUser();
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         if (session?.user) {
           setState({
-            user: session.user,
+            user: {
+              id: session.user.id,
+              email: session.user.email,
+              user_metadata: session.user.user_metadata,
+              last_sign_in_at: session.user.last_sign_in_at,
+            },
             isLoading: false,
-            isAuthenticated: true,
+            isAuthenticated: session.user.email_confirmed_at != null,
           });
         } else {
           setState({
@@ -95,9 +100,14 @@ export function AuthProvider({
         return false;
       }
       setState({
-        user: data.user,
+        user: {
+          id: data.user.id,
+          email: data.user.email,
+          user_metadata: data.user.user_metadata,
+          last_sign_in_at: data.user.last_sign_in_at,
+        },
         isLoading: false,
-        isAuthenticated: true,
+        isAuthenticated: data.user.email_confirmed_at != null,
       });
       return true;
     } catch (error) {
