@@ -23,6 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useCart } from "@/contexts/cart-context";
 import { useAuth } from "@/contexts/auth-context";
@@ -31,11 +32,13 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { itemCount } = useCart();
-  const { user, isAuthenticated, logout } = useAuth();
-  const { language, setLanguage, t } = useLanguage();
+  const router = useRouter();
+  const { user, logout } = useAuth();
+  const { setLanguage, t } = useLanguage();
 
   const handleLogout = () => {
     logout();
+    router.push("/auth/login");
   };
 
   return (
@@ -110,7 +113,7 @@ export function Header() {
             </DropdownMenu>
 
             {/* User Menu */}
-            {isAuthenticated && user ? (
+            {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -240,7 +243,7 @@ export function Header() {
                 >
                   {t("nav.sale")}
                 </Link>
-                {isAuthenticated ? (
+                {user ? (
                   <>
                     <Link
                       href="/account"
