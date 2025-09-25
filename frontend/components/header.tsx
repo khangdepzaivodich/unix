@@ -119,18 +119,25 @@ export function Header() {
                   >
                     <Avatar className="h-8 w-8">
                       <AvatarImage
-                        src={user.avatar || "/placeholder.svg"}
-                        alt={user.name}
+                        src={
+                          user?.user_metadata?.avatar_url || "/placeholder.svg"
+                        }
+                        alt={user.email}
                       />
-                      <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                      {/* <AvatarFallback>{user.name.charAt(0)}</AvatarFallback> */}
+                      <AvatarFallback>{user.email?.charAt(0)}</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuContent
+                  className="w-56 bg-white"
+                  align="end"
+                  forceMount
+                >
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium leading-none">
-                        {user.name}
+                        {user.user_metadata?.name}
                       </p>
                       <p className="text-xs leading-none text-muted-foreground">
                         {user.email}

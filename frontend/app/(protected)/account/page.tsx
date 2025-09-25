@@ -143,15 +143,18 @@ export default function AccountPage() {
                 <div className="flex items-center space-x-4">
                   <Avatar className="h-20 w-20">
                     <AvatarImage
-                      src={user.avatar || "/placeholder.svg"}
-                      alt={user.name}
+                      src={
+                        user?.user_metadata?.avatar_url || "/placeholder.svg"
+                      }
+                      alt={user.email}
                     />
-                    <AvatarFallback className="text-lg">
-                      {user.name.charAt(0)}
-                    </AvatarFallback>
+                    {/* <AvatarFallback>{user.name.charAt(0)}</AvatarFallback> */}
+                    <AvatarFallback>{user.email?.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-lg font-semibold">{user.name}</h3>
+                    <h3 className="text-lg font-semibold">
+                      {user.user_metadata?.name}
+                    </h3>
                     <p className="text-muted-foreground">{user.email}</p>
                   </div>
                 </div>

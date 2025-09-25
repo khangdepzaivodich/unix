@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SignInWithGoogle from "./providers/SignInWithGoogle";
 import SignInWithFacebook from "./providers/SignInWithFacebook";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+// import { Eye, EyeOff, Loader2 } from "lucide-react";
 export function LoginForm({
   className,
   ...props
