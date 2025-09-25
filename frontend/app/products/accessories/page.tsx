@@ -16,6 +16,9 @@ export default function AccessoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   // Filter accessories products
+  const allAccessoriesProducts = products.filter(
+    (product) => product.category === "men" || product.tags?.includes("men")
+  );
   const accessoriesProducts = useMemo(() => {
     let filtered = products.filter(
       (product) =>
@@ -44,29 +47,31 @@ export default function AccessoriesPage() {
   }, [sortBy, selectedCategory]);
 
   const categories = [
-    { id: "all", name: "Tất cả", count: accessoriesProducts.length },
+    { id: "all", name: "Tất cả", count: allAccessoriesProducts.length },
     {
       id: "bags",
       name: "Túi xách",
-      count: accessoriesProducts.filter((p) => p.subcategory === "bags").length,
+      count: allAccessoriesProducts.filter((p) => p.subcategory === "bags")
+        .length,
     },
     {
       id: "watches",
       name: "Đồng hồ",
-      count: accessoriesProducts.filter((p) => p.subcategory === "watches")
+      count: allAccessoriesProducts.filter((p) => p.subcategory === "watches")
         .length,
     },
     {
       id: "jewelry",
       name: "Trang sức",
-      count: accessoriesProducts.filter((p) => p.subcategory === "jewelry")
+      count: allAccessoriesProducts.filter((p) => p.subcategory === "jewelry")
         .length,
     },
     {
       id: "sunglasses",
       name: "Kính mát",
-      count: accessoriesProducts.filter((p) => p.subcategory === "sunglasses")
-        .length,
+      count: allAccessoriesProducts.filter(
+        (p) => p.subcategory === "sunglasses"
+      ).length,
     },
   ];
 

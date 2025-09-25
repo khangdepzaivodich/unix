@@ -16,6 +16,9 @@ export default function WomenPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   // Filter women's products
+  const allWomenProducts = products.filter(
+    (product) => product.category === "men" || product.tags?.includes("men")
+  );
   const womenProducts = useMemo(() => {
     let filtered = products.filter(
       (product) =>
@@ -43,26 +46,26 @@ export default function WomenPage() {
   }, [sortBy, selectedCategory]);
 
   const categories = [
-    { id: "all", name: "Tất cả", count: womenProducts.length },
+    { id: "all", name: "Tất cả", count: allWomenProducts.length },
     {
       id: "dresses",
       name: "Váy đầm",
-      count: womenProducts.filter((p) => p.subcategory === "dresses").length,
+      count: allWomenProducts.filter((p) => p.subcategory === "dresses").length,
     },
     {
       id: "tops",
       name: "Áo",
-      count: womenProducts.filter((p) => p.subcategory === "tops").length,
+      count: allWomenProducts.filter((p) => p.subcategory === "tops").length,
     },
     {
       id: "bottoms",
       name: "Quần",
-      count: womenProducts.filter((p) => p.subcategory === "bottoms").length,
+      count: allWomenProducts.filter((p) => p.subcategory === "bottoms").length,
     },
     {
       id: "shoes",
       name: "Giày dép",
-      count: womenProducts.filter((p) => p.subcategory === "shoes").length,
+      count: allWomenProducts.filter((p) => p.subcategory === "shoes").length,
     },
   ];
 
