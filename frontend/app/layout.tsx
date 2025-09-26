@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+// import { GeistSans } from "geist/font/sans";
+// import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -12,7 +12,6 @@ import { LiveChat } from "@/components/customer-support/live-chat";
 import { Suspense } from "react";
 import "./globals.css";
 import { cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
 
 export const metadata: Metadata = {
   title: "FashionStore - Thời trang hiện đại",
@@ -28,14 +27,13 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const language = cookieStore.get("language")?.value || "vi";
-  const supabase = createClient();
-  const currentSession = (await supabase).auth.getSession();
 
   return (
-    <html lang="vi" suppressHydrationWarning>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="vi">
+      {/* <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>\ */}
+      <body>
         <LanguageProvider initialLanguage={language as "vi" | "en"}>
-          <AuthProvider initialSession={(await currentSession).data.session}>
+          <AuthProvider>
             <CartProvider>
               <Suspense fallback={<div>Loading...</div>}>
                 <Header />

@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User, Mail, Phone, MapPin, Edit, Save, X } from "lucide-react";
@@ -18,7 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/auth-context";
 
 export default function AccountPage() {
-  const { user, isAuthenticated, isLoading, updateProfile } = useAuth();
+  const { user, isLoading, updateProfile } = useAuth();
   const router = useRouter();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -31,15 +31,15 @@ export default function AccountPage() {
   });
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push("/login");
+    if (isLoading) {
+      router.push("/auth/login");
     }
-  }, [isAuthenticated, isLoading, router]);
+  }, [isLoading, router]);
 
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.name || "",
+        name: user.user_metadata?.name || "",
         email: user.email || "",
         phone: "",
         address: "",
@@ -67,7 +67,7 @@ export default function AccountPage() {
   const handleCancel = () => {
     if (user) {
       setFormData({
-        name: user.name || "",
+        name: user.user_metadata?.name || "",
         email: user.email || "",
         phone: "",
         address: "",
@@ -84,7 +84,7 @@ export default function AccountPage() {
     );
   }
 
-  if (!isAuthenticated || !user) {
+  if (!user) {
     return null;
   }
 
@@ -188,7 +188,7 @@ export default function AccountPage() {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        disabled={!isEditing}
+                        disabled={true}
                         className="pl-10"
                       />
                     </div>
@@ -246,7 +246,7 @@ export default function AccountPage() {
                     Bạn chưa có đơn hàng nào
                   </p>
                   <Button className="mt-4" asChild>
-                    <a href="/products">Bắt đầu mua sắm</a>
+                    <Link href="/products">Bắt đầu mua sắm</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -261,11 +261,11 @@ export default function AccountPage() {
                   Quản lý cài đặt bảo mật và thông báo
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between p-4 border rounded-lg">
+              <CardContent className="space-y-4 ">
+                <div className="flex items-center justify-between p-3 border rounded-lg">
                   <div>
-                    <h4 className="font-semibold">Đổi mật khẩu</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 className="font-semibold ">Đổi mật khẩu</h4>
+                    <p className="text-sm text-muted-foreground ">
                       Cập nhật mật khẩu để bảo mật tài khoản
                     </p>
                   </div>

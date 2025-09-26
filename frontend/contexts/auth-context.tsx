@@ -5,11 +5,9 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User, UserRole, Permission } from "@/lib/types";
 // import { hasPermission, hasAnyPermission, canAccessRoute } from "@/lib/rbac";
-import { Session } from "@supabase/supabase-js";
 interface AuthState {
   user: User | null;
   isLoading: boolean;
-  isAuthenticated: boolean;
 }
 
 interface AuthContextType extends AuthState {
@@ -25,19 +23,11 @@ interface AuthContextType extends AuthState {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({
-  children,
-  initialSession,
-}: {
-  children: React.ReactNode;
-  initialSession: Session | null;
-}) {
-  const [session, setSession] = useState(initialSession);
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const supabase = createClient();
   const [state, setState] = useState<AuthState>({
     user: null,
     isLoading: true,
-    isAuthenticated: false,
   });
 
   // Load user from Supabase on mount and listen for auth changes
@@ -72,13 +62,11 @@ export function AuthProvider({
               last_sign_in_at: session.user.last_sign_in_at,
             },
             isLoading: false,
-            isAuthenticated: session.user.email_confirmed_at != null,
           });
         } else {
           setState({
             user: null,
             isLoading: false,
-            isAuthenticated: false,
           });
         }
       }
@@ -107,7 +95,6 @@ export function AuthProvider({
           last_sign_in_at: data.user.last_sign_in_at,
         },
         isLoading: false,
-        isAuthenticated: data.user.email_confirmed_at != null,
       });
       return true;
     } catch (error) {
@@ -136,7 +123,6 @@ export function AuthProvider({
       setState({
         user: data.user,
         isLoading: false,
-        isAuthenticated: true,
       });
       return true;
     } catch (error) {
@@ -151,7 +137,6 @@ export function AuthProvider({
     setState({
       user: null,
       isLoading: false,
-      isAuthenticated: false,
     });
   };
 
@@ -166,7 +151,6 @@ export function AuthProvider({
       setState({
         user: userData?.user || null,
         isLoading: false,
-        isAuthenticated: !!userData?.user,
       });
       return true;
     } catch (error) {
