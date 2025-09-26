@@ -29,7 +29,7 @@ export default async function RootLayout({
   const language = cookieStore.get("language")?.value || "vi";
 
   return (
-    <html lang="vi">
+    <html lang="vi" suppressHydrationWarning>
       {/* <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>\ */}
       <body>
         <LanguageProvider initialLanguage={language as "vi" | "en"}>

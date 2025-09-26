@@ -34,19 +34,18 @@ export function LoginForm({
     setIsLoading(true);
     setError(null);
 
-    try {
-      await login(email, password);
+    const lg = await login(email, password);
+    if (lg) router.push("/");
+    else setError("Thông tin đăng nhập sai");
+    // Update this route to redirect to an authenticated route. The user already has an active session.
 
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/");
-    } catch (error: unknown) {
-      setError(
-        error instanceof Error ? error.message : "Thông tin đăng nhập sai"
-      );
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    // } catch (error: unknown) {
+    //   setError(
+    //     error instanceof Error ? error.message : "Thông tin đăng nhập sai"
+    //   );
+    //   console.log(error);
+    // } finally {
+    setIsLoading(false);
   };
 
   return (
