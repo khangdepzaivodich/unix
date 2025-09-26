@@ -34,7 +34,6 @@ export function SignUpForm({
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    // const supabase = createClient();
     setIsLoading(true);
     setError(null);
 
@@ -48,18 +47,18 @@ export function SignUpForm({
       setIsLoading(false);
       return;
     }
-    try {
-      const check = await register(email, password, name);
-      if (check) {
-        router.push("/auth/sign-up-success");
-      } else {
-        setError("Email đã được sử dụng hoặc có lỗi xảy ra");
-      }
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
-    } finally {
-      setIsLoading(false);
+    // try {
+    const check = await register(email, password, name);
+    if (check) {
+      router.push("/auth/sign-up-success");
+    } else {
+      setError("Email đã được sử dụng hoặc có lỗi xảy ra");
     }
+    // } catch (error: unknown) {
+    //   setError(error instanceof Error ? error.message : "An error occurred");
+    // } finally {
+    setIsLoading(false);
+    // }
   };
 
   return (

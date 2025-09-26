@@ -1,19 +1,14 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { FaFacebook } from "react-icons/fa";
-import { createClient } from "@/lib/supabase/client";
+import { useAuth } from "@/contexts/auth-context";
 import { useState } from "react";
 function SignInWithFacebook() {
   const [isLoading, setIsLoading] = useState(false);
+  const { OauthLogin } = useAuth();
   const handleFacebookLogin = async () => {
-    const supabase = createClient();
     setIsLoading(true);
-    await supabase.auth.signInWithOAuth({
-      provider: "facebook",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    await OauthLogin("fb");
   };
   return (
     <Button

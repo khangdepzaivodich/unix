@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,14 +36,7 @@ export function LoginForm({
     const lg = await login(email, password);
     if (lg) router.push("/");
     else setError("Thông tin đăng nhập sai");
-    // Update this route to redirect to an authenticated route. The user already has an active session.
 
-    // } catch (error: unknown) {
-    //   setError(
-    //     error instanceof Error ? error.message : "Thông tin đăng nhập sai"
-    //   );
-    //   console.log(error);
-    // } finally {
     setIsLoading(false);
   };
 
