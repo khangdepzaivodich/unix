@@ -16,6 +16,9 @@ export default function MenPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   // Filter men's products
+  const allMenProducts = products.filter(
+    (product) => product.category === "men" || product.tags?.includes("men")
+  );
   const menProducts = useMemo(() => {
     let filtered = products.filter(
       (product) => product.category === "men" || product.tags?.includes("men")
@@ -42,26 +45,26 @@ export default function MenPage() {
   }, [sortBy, selectedCategory]);
 
   const categories = [
-    { id: "all", name: "Tất cả", count: menProducts.length },
+    { id: "all", name: "Tất cả", count: allMenProducts.length },
     {
       id: "shirts",
       name: "Áo sơ mi",
-      count: menProducts.filter((p) => p.subcategory === "shirts").length,
+      count: allMenProducts.filter((p) => p.subcategory === "shirts").length,
     },
     {
       id: "pants",
       name: "Quần dài",
-      count: menProducts.filter((p) => p.subcategory === "pants").length,
+      count: allMenProducts.filter((p) => p.subcategory === "pants").length,
     },
     {
       id: "jackets",
       name: "Áo khoác",
-      count: menProducts.filter((p) => p.subcategory === "jackets").length,
+      count: allMenProducts.filter((p) => p.subcategory === "jackets").length,
     },
     {
       id: "shoes",
       name: "Giày dép",
-      count: menProducts.filter((p) => p.subcategory === "shoes").length,
+      count: allMenProducts.filter((p) => p.subcategory === "shoes").length,
     },
   ];
 
