@@ -1,19 +1,14 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { FaGoogle } from "react-icons/fa";
-import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
+import { useAuth } from "@/contexts/auth-context";
 function SignInWithGoogle() {
   const [isLoading, setIsLoading] = useState(false);
+  const { OauthLogin } = useAuth();
   const handleGoogleLogin = async () => {
-    const supabase = createClient();
     setIsLoading(true);
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    await OauthLogin("gg");
   };
   return (
     <Button

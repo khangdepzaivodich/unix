@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -16,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/contexts/auth-context";
 
 export function ForgotPasswordForm({
   className,
@@ -25,26 +25,18 @@ export function ForgotPasswordForm({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const { t } = useLanguage();
+  const { resetPasswordForEmail } = useAuth();
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    const supabase = createClient();
     setIsLoading(true);
     setError(null);
 
-    try {
-      // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/update-password`,
-      });
-      if (error) throw error;
-      setSuccess(true);
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
-    } finally {
-      setIsLoading(false);
-    }
+    const load = await resetPasswordForEmail(email);
+    if (load) setSuccess(true);
+    else setError("Có lỗi xảy ra!");
+    setIsLoading(false);
   };
 
   return (
@@ -52,13 +44,20 @@ export function ForgotPasswordForm({
       {success ? (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
+            <CardTitle className="text-2xl">
+              Kiểm tra email
+              {/* Check Your Email */}
+            </CardTitle>
+            <CardDescription className="text-slate-400">
+              Yêu cầu thay đổi mật khẩu đã được gửi đi
+              {/* Password reset instructions sent */}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive
-              a password reset email.
+              {/* If you registered using your email and password, you will receive
+              a password reset email. */}
+              Nếu bạn đã có tài khoản, bạn sẽ nhận được email thông báo
             </p>
           </CardContent>
         </Card>

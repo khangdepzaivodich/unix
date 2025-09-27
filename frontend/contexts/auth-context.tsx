@@ -13,7 +13,10 @@ interface AuthState {
 interface AuthContextType extends AuthState {
   login: (email: string, password: string) => Promise<boolean>;
   register: (email: string, password: string, name: string) => Promise<boolean>;
+  OauthLogin: (provider: string) => void;
   logout: () => void;
+  updatePassword: (password: string) => Promise<boolean>;
+  resetPasswordForEmail: (email: string) => Promise<boolean>;
   updateProfile: (data: Partial<User>) => Promise<boolean>;
   hasPermission: (permission: Permission) => boolean;
   hasAnyPermission: (permissions: Permission[]) => boolean;
@@ -32,25 +35,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Load user from Supabase on mount and listen for auth changes
   useEffect(() => {
-    // const getUser = async () => {
-    //   setState((prev) => ({ ...prev, isLoading: true }));
-    //   const { data, error } = await supabase.auth.getUser();
-    //   if (data?.user) {
-    //     setState({
-    //       user: data.user,
-    //       isLoading: false,
-    //       isAuthenticated: true,
-    //     });
-    //   } else {
-    //     setState({
-    //       user: null,
-    //       isLoading: false,
-    //       isAuthenticated: false,
-    //     });
-    //   }
-    // };
-    // getUser();
-
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         if (session?.user) {
@@ -103,7 +87,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return false;
     }
   };
-
+  const OauthLogin = async (provider: string) => {
+    if (provider === "gg") {
+      supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+    } else if (provider === "fb") {
+      supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+    }
+  };
   const register = async (
     email: string,
     password: string,
@@ -139,7 +139,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       isLoading: false,
     });
   };
-
+  const updatePassword = async (password: string): Promise<boolean> => {
+    try {
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) {
+        return false;
+      }
+      return true;
+    } catch {
+      // console.error("Update password error:", e);
+      return false;
+    }
+  };
+  const resetPasswordForEmail = async (email: string): Promise<boolean> => {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/update-password`,
+      });
+      if (error) {
+        return false;
+      }
+      return true;
+    } catch {
+      // console.error("Update password error:", e);
+      return false;
+    }
+  };
   const updateProfile = async (data: Partial<User>): Promise<boolean> => {
     try {
       if (!state.user) return false;
@@ -185,7 +210,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         ...state,
         login,
         register,
+        OauthLogin,
         logout,
+        updatePassword,
+        resetPasswordForEmail,
         updateProfile,
         hasPermission: checkPermission,
         hasAnyPermission: checkAnyPermission,

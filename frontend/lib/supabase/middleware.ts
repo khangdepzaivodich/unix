@@ -58,6 +58,7 @@ export async function updateSession(request: NextRequest) {
     "/returns",
     "/privacy",
     "/products",
+    "/unauthorized",
   ];
 
   // Check if current path is public

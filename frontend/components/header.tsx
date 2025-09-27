@@ -47,7 +47,6 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            {/* <div className="h-8 w-8 rounded-full bg-primary"></div> */}
             <Image src={"/logo.png"} alt="Logo" width={80} height={100} />
             <span className="text-2xl font-bold">FlexStyle</span>
           </Link>
