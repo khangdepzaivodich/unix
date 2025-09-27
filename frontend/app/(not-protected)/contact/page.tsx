@@ -43,7 +43,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "Địa chỉ cửa hàng",
-      details: ["123 Phố Thời Trang, Quận Hoàn Kiếm", "Hà Nội, Việt Nam"],
+      details: ["An Dương Vương, Phường Chợ Quán, Hồ Chí Minh, Việt Nam"],
     },
     {
       icon: Phone,
@@ -53,7 +53,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      details: ["info@FashionStore.vn", "support@FashionStore.vn"],
+      details: ["info@FlexStyle.vn", "support@FlexStyle.vn"],
     },
     {
       icon: Clock,
@@ -90,13 +90,43 @@ export default function ContactPage() {
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Có câu hỏi, góp ý hay cần hỗ trợ? Đừng ngần ngại liên hệ với chúng
-          tôi. Đội ngũ FashionStore luôn sẵn sàng hỗ trợ bạn 24/7.
+          tôi. Đội ngũ FlexStyle luôn sẵn sàng hỗ trợ bạn 24/7.
         </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-12 mb-16">
-        {/* Contact Form */}
+        {/* Map Section */}
         <Card>
+          <CardHeader>
+            {/* <CardTitle className="text-center text-xl">
+              Vị trí cửa hàng
+            </CardTitle> */}
+          </CardHeader>
+          <CardContent>
+            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+              <div className="text-center h-full w-full">
+                {/* <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" /> */}
+                {/* <p className="text-muted-foreground">
+                Bản đồ Google Maps sẽ được hiển thị ở đây
+              </p> */}
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6505251921226!2d106.67960847485665!3d10.761393989386459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b91dddf0b%3A0x1ab004c91f448812!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1758353056756!5m2!1svi!2s"
+                  width="100%"
+                  height="160%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                {/* <p className="text-sm text-muted-foreground mt-2">
+                123 Phố Thời Trang, Quận Hoàn Kiếm, Hà Nội
+              </p> */}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        {/* Contact Form */}
+        {/* <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageCircle className="h-5 w-5" />
@@ -116,7 +146,6 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
                     required
-                    className="bg-white"
                   />
                 </div>
                 <div>
@@ -126,7 +155,6 @@ export default function ContactPage() {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
-                    className="bg-white"
                   />
                 </div>
               </div>
@@ -138,7 +166,6 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
-                  className="bg-white"
                 />
               </div>
               <div>
@@ -148,7 +175,6 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={(e) => handleInputChange("subject", e.target.value)}
                   required
-                  className="bg-white"
                 />
               </div>
               <div>
@@ -159,7 +185,6 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
                   required
-                  className="bg-white"
                 />
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
@@ -168,7 +193,7 @@ export default function ContactPage() {
               </Button>
             </form>
           </CardContent>
-        </Card>
+        </Card> */}
 
         {/* Contact Information */}
         <div className="space-y-6">
@@ -216,35 +241,6 @@ export default function ContactPage() {
           ))}
         </div>
       </div>
-
-      {/* Map Section */}
-      <Card className="mx-auto w-[60%]">
-        <CardHeader>
-          <CardTitle className="text-center text-xl">Vị trí cửa hàng</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-            <div className="text-center h-full w-full">
-              {/* <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" /> */}
-              {/* <p className="text-muted-foreground">
-                Bản đồ Google Maps sẽ được hiển thị ở đây
-              </p> */}
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6505251921226!2d106.67960847485665!3d10.761393989386459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b91dddf0b%3A0x1ab004c91f448812!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1758353056756!5m2!1svi!2s"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-              {/* <p className="text-sm text-muted-foreground mt-2">
-                123 Phố Thời Trang, Quận Hoàn Kiếm, Hà Nội
-              </p> */}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }

@@ -5,47 +5,49 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Textarea } from "@/components/ui/textarea";
+// import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle, Phone, Mail, Clock, Search } from "lucide-react";
+import { MessageCircle, Phone, Mail, Clock } from "lucide-react";
 
 export default function SupportPage() {
   const faqs = [
     {
-      question: "How do I track my order?",
+      question: "Làm thế nào để theo dõi đơn hàng của tôi?",
       answer:
-        "You can track your order by logging into your account and visiting the 'My Orders' section.",
-      category: "Orders",
+        "Bạn có thể theo dõi đơn hàng bằng cách đăng nhập vào tài khoản và nhấp vào mục 'Đơn hàng' ở trên thanh tiêu đề",
+      category: "Đặt hàng",
     },
     {
-      question: "What is your return policy?",
+      question: "Chính sách đổi trả hàng của FlexStyle như thế nào?",
       answer:
-        "We offer a 30-day return policy for all items in original condition with tags attached.",
-      category: "Returns",
+        "Chúng tôi hỗ trợ chính sách đổi trả trong vòng 30 ngày với những điều kiện được đính kèm",
+      category: "Đổi trả hàng",
     },
     {
-      question: "How long does shipping take?",
+      question: "Đơn hàng của tôi bao nhiêu ngày thì dược giao tới?",
       answer:
-        "Standard shipping takes 3-5 business days, while express shipping takes 1-2 business days.",
-      category: "Shipping",
+        "Đơn hàng của bạn sẽ được giao chậm nhất là 10 ngày, tùy thuộc vào khoảng cách và đơn vị vận tải.",
+      category: "Chính sách giao hàng",
     },
     {
-      question: "Do you offer international shipping?",
+      question: "Có giao hàng quốc tế không?",
       answer:
-        "Yes, we ship to over 50 countries worldwide. Shipping costs vary by location.",
-      category: "Shipping",
+        "FlexStyle hiện chỉ hỗ trợ giao hàng trong nước. Chính sách hỗ trợ quốc tế sẽ được FlexStyle triển khai sau.",
+      category: "Chính sách giao hàng",
     },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Customer Support</h1>
+        <h1 className="text-4xl font-bold tracking-tight">
+          Bộ phận chăm sóc khách hàng
+        </h1>
         <p className="text-xl text-muted-foreground">
-          We're here to help you with any questions or concerns
+          Chúng tôi ở đây vì bạn, vì những gì bạn cần và những gì bạn xứng đáng!
         </p>
       </div>
 
@@ -55,13 +57,13 @@ export default function SupportPage() {
             <MessageCircle className="h-12 w-12 mx-auto text-blue-500" />
             <CardTitle>Live Chat</CardTitle>
             <CardDescription>
-              Get instant help from our support team
+              Cổng chat trực tuyến hỗ trợ trực tiếp cho khách hàng
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
             <Badge variant="outline" className="mb-4">
               <Clock className="h-3 w-3 mr-1" />
-              Available 24/7
+              Hoạt động 24/7
             </Badge>
           </CardContent>
         </Card>
@@ -71,13 +73,13 @@ export default function SupportPage() {
             <Phone className="h-12 w-12 mx-auto text-green-500" />
             <CardTitle>Phone Support</CardTitle>
             <CardDescription>
-              Speak directly with our support team
+              Liên hệ trực tiếp với chúng tôi qua số hotline
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
-            <p className="font-medium mb-2">1-800-FASHION</p>
+            <p className="font-medium mb-2">+84 909090099</p>
             <p className="text-sm text-muted-foreground mb-4">
-              Mon-Fri: 9AM-6PM EST
+              Thứ hai - thứ sáu: 9AM-6PM EST
             </p>
           </CardContent>
         </Card>
@@ -86,19 +88,21 @@ export default function SupportPage() {
           <CardHeader className="text-center">
             <Mail className="h-12 w-12 mx-auto text-purple-500" />
             <CardTitle>Email Support</CardTitle>
-            <CardDescription>Send us a detailed message</CardDescription>
+            <CardDescription>
+              Gửi email cho chúng tôi để nếu bạn gặp khó khăn
+            </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
-            <p className="font-medium mb-2">support@fashionstore.com</p>
+            <p className="font-medium mb-2">support@flexstyle.com</p>
             <p className="text-sm text-muted-foreground mb-4">
-              Response within 24 hours
+              Phản hồi trong vòng 24 giờ
             </p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
-        <Card>
+      <div className="grid gap-8 md:grid-cols-1">
+        {/* <Card>
           <CardHeader>
             <CardTitle>Contact Form</CardTitle>
             <CardDescription>
@@ -134,13 +138,13 @@ export default function SupportPage() {
             </div>
             <Button className="w-full">Send Message</Button>
           </CardContent>
-        </Card>
+        </Card> */}
 
         <Card>
           <CardHeader>
-            <CardTitle>Frequently Asked Questions</CardTitle>
+            <CardTitle>Những câu hỏi thường gặp</CardTitle>
             <CardDescription>
-              Find quick answers to common questions
+              Dưới đây là những câu hỏi mà khách hàng thường hỏi FlexStyle
             </CardDescription>
           </CardHeader>
           <CardContent>

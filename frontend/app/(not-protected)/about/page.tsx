@@ -3,13 +3,14 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Users, Award, Globe, Heart, Target, Zap } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutPage() {
   const stats = [
     { icon: Users, label: "Khách hàng hài lòng", value: "50,000+" },
-    { icon: Globe, label: "Quốc gia phục vụ", value: "15+" },
-    { icon: Award, label: "Năm kinh nghiệm", value: "10+" },
-    { icon: Heart, label: "Sản phẩm yêu thích", value: "1,000+" },
+    { icon: Globe, label: "Quốc gia phục vụ", value: "Việt Nam" },
+    { icon: Award, label: "Năm kinh nghiệm", value: "2+" },
+    { icon: Heart, label: "Sản phẩm yêu thích", value: "100+" },
   ];
 
   const values = [
@@ -39,13 +40,12 @@ export default function AboutPage() {
       <div className="text-center mb-16">
         <Badge className="mb-4 ">VỀ CHÚNG TÔI</Badge>
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          Câu Chuyện Của <span className="text-primary">FashionStore</span>
+          Câu Chuyện Của <span className="text-primary">FlexStyle</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Từ năm 2014, FashionStore đã trở thành điểm đến tin cậy cho những ai
-          yêu thích thời trang. Chúng tôi tự hào mang đến những sản phẩm chất
-          lượng cao với phong cách hiện đại, phù hợp với mọi cá tính và hoàn
-          cảnh.
+          Từ năm 2014, FlexStyle đã trở thành điểm đến tin cậy cho những ai yêu
+          thích thời trang. Chúng tôi tự hào mang đến những sản phẩm chất lượng
+          cao với phong cách hiện đại, phù hợp với mọi cá tính và hoàn cảnh.
         </p>
       </div>
 
@@ -70,10 +70,10 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-6">Hành Trình Của Chúng Tôi</h2>
           <div className="space-y-4 text-muted-foreground">
             <p>
-              FashionStore được thành lập với một tầm nhìn đơn giản nhưng mạnh
-              mẽ: làm cho thời trang chất lượng cao trở nên dễ tiếp cận với mọi
-              người. Bắt đầu từ một cửa hàng nhỏ tại Hà Nội, chúng tôi đã phát
-              triển thành một thương hiệu được yêu thích trên toàn quốc.
+              FlexStyle được thành lập với một tầm nhìn đơn giản nhưng mạnh mẽ:
+              làm cho thời trang chất lượng cao trở nên dễ tiếp cận với mọi
+              người. Bắt đầu từ một cửa hàng nhỏ tại TP.Hồ Chí Minh, chúng tôi
+              đã phát triển thành một thương hiệu được yêu thích trên toàn quốc.
             </p>
             <p>
               Với đội ngũ thiết kế tài năng và am hiểu sâu sắc về xu hướng thời
@@ -82,8 +82,8 @@ export default function AboutPage() {
               Việt.
             </p>
             <p>
-              Hôm nay, FashionStore tự hào phục vụ hàng chục nghìn khách hàng
-              mỗi tháng, với hệ thống cửa hàng trải dài khắp cả nước và nền tảng
+              Hôm nay, FlexStyle tự hào phục vụ hàng chục nghìn khách hàng mỗi
+              tháng, với hệ thống cửa hàng trải dài khắp cả nước và nền tảng
               thương mại điện tử hiện đại, mang đến trải nghiệm mua sắm tuyệt
               vời nhất.
             </p>
@@ -105,7 +105,7 @@ export default function AboutPage() {
         <h2 className="text-3xl font-bold mb-4">Giá Trị Cốt Lõi</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Những giá trị này định hướng mọi hoạt động của chúng tôi và tạo nên sự
-          khác biệt của FashionStore
+          khác biệt của FlexStyle
         </p>
       </div>
 
@@ -130,8 +130,7 @@ export default function AboutPage() {
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold mb-4">Đội Ngũ Của Chúng Tôi</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Những con người tài năng và đam mê đứng sau thành công của
-          FashionStore
+          Những con người tài năng và đam mê đứng sau thành công của FlexStyle
         </p>
       </div>
 
@@ -140,23 +139,23 @@ export default function AboutPage() {
           {
             name: "Nguyễn Bảo Huy",
             role: "CEO & Founder",
-            image: "ceo-portrait",
+            image: "bhuy",
           },
           {
             name: "Nguyễn Gia Huy",
             role: "Creative Director",
-            image: "creative-director-portrait",
+            image: "ghuy",
           },
           {
             name: "Phan Tuấn Khang",
             role: "Head of Operations",
-            image: "operations-head-portrait",
+            image: "khang",
           },
         ].map((member, index) => (
           <Card key={index}>
             <CardContent className="pt-6 text-center">
               <Image
-                src={`/abstract-geometric-shapes.png?height=200&width=200&query=${member.image}`}
+                src={`/${member.image}.png`}
                 alt={member.name}
                 width={200}
                 height={200}
@@ -174,18 +173,18 @@ export default function AboutPage() {
           {
             name: "Nguyễn Hoàng Chương",
             role: "Head of Operations",
-            image: "operations-head-portrait",
+            image: "hchuong",
           },
           {
             name: "Ngô Dương Đức Thắng",
             role: "Head of Operations",
-            image: "operations-head-portrait",
+            image: "thang",
           },
         ].map((member, index) => (
           <Card key={index} className="col-span-2">
             <CardContent className="pt-6 text-center">
               <Image
-                src={`/abstract-geometric-shapes.png?height=200&width=200&query=${member.image}`}
+                src={`/${member.image}.png`}
                 alt={member.name}
                 width={200}
                 height={200}
@@ -208,12 +207,12 @@ export default function AboutPage() {
           phong cách của bạn
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
+          <Link
             href="/products"
             className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 "
           >
             Khám Phá Sản Phẩm
-          </a>
+          </Link>
           <a
             href="/contact"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-8 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"

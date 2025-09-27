@@ -70,7 +70,7 @@ export default function ReturnsPage() {
         <Card className="text-center">
           <CardContent className="pt-8">
             <Clock className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">30 Ngày</h3>
+            <h3 className="text-xl font-bold mb-2">7 Ngày</h3>
             <p className="text-muted-foreground">
               Thời gian đổi trả kể từ ngày nhận hàng
             </p>
@@ -115,7 +115,7 @@ export default function ReturnsPage() {
               <p>✅ Sản phẩm không có mùi lạ (nước hoa, thuốc lá...)</p>
               <p>✅ Còn đầy đủ phụ kiện đi kèm</p>
               <p>✅ Có hóa đơn mua hàng hoặc mã đơn hàng</p>
-              <p>✅ Trong thời hạn 30 ngày kể từ ngày nhận hàng</p>
+              <p>✅ Trong thời hạn 7 ngày kể từ ngày nhận hàng</p>
             </CardContent>
           </Card>
 
@@ -131,8 +131,8 @@ export default function ReturnsPage() {
               <p>❌ Sản phẩm bị rách, bẩn do lỗi người dùng</p>
               <p>❌ Sản phẩm có mùi lạ do người dùng</p>
               <p>❌ Thiếu phụ kiện, tem mác</p>
-              <p>❌ Quá thời hạn 30 ngày</p>
-              <p>❌ Sản phẩm sale trên 50% (trừ lỗi từ shop)</p>
+              <p>❌ Quá thời hạn 7 ngày</p>
+              <p>❌ Sản phẩm sale trên 35% (trừ lỗi từ shop)</p>
             </CardContent>
           </Card>
         </div>
@@ -196,9 +196,9 @@ export default function ReturnsPage() {
             <p>
               <strong>Thanh toán online:</strong> 3-7 ngày làm việc
             </p>
-            <p>
+            {/* <p>
               <strong>Thanh toán COD:</strong> 1-3 ngày làm việc
-            </p>
+            </p> */}
             <p>
               <strong>Ví điện tử:</strong> 1-2 ngày làm việc
             </p>
@@ -243,7 +243,7 @@ export default function ReturnsPage() {
             có vấn đề
           </p>
           <p>
-            • Sản phẩm sale trên 50% chỉ được đổi trả nếu có lỗi từ nhà sản xuất
+            • Sản phẩm sale trên 35% chỉ được đổi trả nếu có lỗi từ nhà sản xuất
           </p>
           <p>
             • Đối với sản phẩm đặc biệt (đồ lót, trang sức), vui lòng liên hệ
@@ -275,7 +275,7 @@ export default function ReturnsPage() {
               href="mailto:support@FashionStore.vn"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
             >
-              Email: support@FashionStore.vn
+              Email: support@FlexStyle.vn
             </a>
           </div>
         </CardContent>

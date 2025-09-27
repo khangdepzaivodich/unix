@@ -43,7 +43,6 @@ export function ProtectedRoute({
       return;
     }
   }, [
-    isAuthenticated,
     isLoading,
     user,
     hasAnyPermission,
@@ -59,10 +58,6 @@ export function ProtectedRoute({
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
-  }
-
-  if (!isAuthenticated) {
-    return null;
   }
 
   if (requiredRoles.length > 0 && user && !requiredRoles.includes(user.role)) {

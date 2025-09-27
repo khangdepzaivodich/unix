@@ -68,9 +68,9 @@ export default function PrivacyPage() {
           Bảo Vệ <span className="text-primary">Quyền Riêng Tư</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          FashionStore cam kết bảo vệ thông tin cá nhân của khách hàng. Chúng
-          tôi tuân thủ nghiêm ngặt các quy định về bảo mật dữ liệu và quyền
-          riêng tư.
+          FlexStyle cam kết bảo vệ thông tin cá nhân của khách hàng. Chúng tôi
+          tuân thủ nghiêm ngặt các quy định về bảo mật dữ liệu và quyền riêng
+          tư.
         </p>
         <p className="text-sm text-muted-foreground mt-4">
           Cập nhật lần cuối: 15/01/2024
@@ -350,7 +350,7 @@ export default function PrivacyPage() {
               href="mailto:privacy@fashionstore.vn"
               className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
             >
-              Email: privacy@fashionstore.vn
+              Email: privacy@flexstyle.vn
             </a>
             <a
               href="/contact"

@@ -90,6 +90,14 @@ export function Footer() {
                   Chính sách bảo mật
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/support"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Hỗ trợ khách hàng
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -139,7 +147,7 @@ export function Footer() {
               <li className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">
-                  123 Đường ABC, Quận 1, TP.HCM
+                  An Dương Vương, Phường Chợ Quán, TP.HCM
                 </span>
               </li>
               <li className="flex items-center space-x-3">
@@ -151,7 +159,7 @@ export function Footer() {
               <li className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">
-                  info@FashionStore.com
+                  info@FlexStyle.com
                 </span>
               </li>
             </ul>

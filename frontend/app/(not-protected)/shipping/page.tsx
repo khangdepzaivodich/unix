@@ -33,14 +33,14 @@ export default function ShippingPage() {
       name: "Giao hàng trong ngày",
       time: "Trong vòng 24h",
       cost: "100.000₫",
-      description: "Chỉ áp dụng tại Hà Nội và TP.HCM, đặt hàng trước 14h.",
+      description: "Chỉ áp dụng tại TP.HCM, đặt hàng trước 14h.",
     },
   ];
 
   const regions = [
-    { name: "Hà Nội & TP.HCM", time: "1-2 ngày", cost: "30.000₫" },
-    { name: "Các tỉnh thành lớn", time: "2-3 ngày", cost: "35.000₫" },
-    { name: "Các tỉnh miền núi", time: "3-5 ngày", cost: "45.000₫" },
+    { name: "TP.HCM", time: "1-2 ngày", cost: "30.000₫" },
+    { name: "Các tỉnh thành lớn", time: "3-5 ngày", cost: "35.000₫" },
+    { name: "Các tỉnh miền núi", time: "5-7 ngày", cost: "45.000₫" },
     { name: "Các đảo xa", time: "5-7 ngày", cost: "60.000₫" },
   ];
 
@@ -53,9 +53,9 @@ export default function ShippingPage() {
           Giao Hàng <span className="text-primary">Toàn Quốc</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          FashionStore cam kết mang đến dịch vụ giao hàng nhanh chóng, an toàn
-          và tiện lợi nhất. Chúng tôi hợp tác với các đơn vị vận chuyển uy tín
-          để đảm bảo sản phẩm đến tay bạn trong tình trạng hoàn hảo.
+          FlexStyle cam kết mang đến dịch vụ giao hàng nhanh chóng, an toàn và
+          tiện lợi nhất. Chúng tôi hợp tác với các đơn vị vận chuyển uy tín để
+          đảm bảo sản phẩm đến tay bạn trong tình trạng hoàn hảo.
         </p>
       </div>
 
@@ -73,9 +73,9 @@ export default function ShippingPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">{method.name}</h3>
                 <div className="space-y-2 mb-4">
-                  <p className="text-2xl font-bold text-primary">
+                  {/* <p className="text-2xl font-bold text-primary">
                     {method.cost}
-                  </p>
+                  </p> */}
                   <p className="text-muted-foreground">{method.time}</p>
                 </div>
                 <p className="text-sm text-muted-foreground">
@@ -117,13 +117,13 @@ export default function ShippingPage() {
                     <MapPin className="h-5 w-5 text-primary" />
                     <div>
                       <h3 className="font-semibold">{region.name}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      {/* <p className="text-sm text-muted-foreground">
                         {region.time}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold">{region.cost}</p>
+                    <p className="font-bold">{region.time}</p>
                   </div>
                 </div>
               </CardContent>
@@ -163,7 +163,7 @@ export default function ShippingPage() {
               step: "4",
               title: "Giao hàng",
               description:
-                "Nhận hàng tại địa chỉ và kiểm tra sản phẩm trước khi thanh toán",
+                "Nhận hàng tại địa chỉ và kiểm tra sản phẩm trước khi nhận hàng",
             },
           ].map((process, index) => (
             <Card key={index} className="text-center">
@@ -187,14 +187,17 @@ export default function ShippingPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <CreditCard className="h-5 w-5" />
-              Thanh Toán Khi Nhận Hàng (COD)
+              Khi Nhận Hàng
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <p>• Kiểm tra sản phẩm trước khi thanh toán</p>
-            <p>• Chỉ thanh toán khi hài lòng với sản phẩm</p>
-            <p>• Phí COD: 20.000₫ cho đơn hàng dưới 300.000₫</p>
-            <p>• Miễn phí COD cho đơn hàng từ 300.000₫</p>
+            <p>• Kiểm tra sản phẩm trước khi nhận</p>
+            <p>• Chỉ bấm xác nhận khi sản phẩm không có vấn đề</p>
+            <p>
+              • Liên hệ ngay cho FlexStyle nếu có vấn đề về sản phẩm trong vòng
+              7 ngày kể từ khi nhận hàng. Sau thời hạn, FlexStyle sẽ không hỗ
+              trợ đổi, trả, hoàn tiền cho khách hàng.
+            </p>
           </CardContent>
         </Card>
 
